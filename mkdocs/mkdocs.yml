@@ -1,1 +1,37 @@
-site_name: My Docs
+site_name: Rails api simple token auth - CRUD2A
+theme:
+  name: 'material'
+  palette:
+    primary: 'red'
+    accent: 'red'
+nav:
+    - Introduction: index.md
+    - Chap1 Setup: ch01.md
+    - Chap2 Scaffold Post: ch02.md
+    - Chap3 Create model and Dummy data: ch03.md
+    - Chap4 Query(READ): ch04.md
+    - Chap5 Mutation(CREATE): ch05.md
+    - Chap6 Authentication: ch06.md
+    - Chap7 Mutation(UPDATE): ch07.md
+    - Chap8 Authorization: ch08.md
+    - Chap9 Mutation(DELETE): ch09.md
+    
+markdown_extensions:
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - codehilite
+  - admonition
