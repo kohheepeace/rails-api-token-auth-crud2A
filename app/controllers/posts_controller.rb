@@ -1,11 +1,16 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :destroy]
-  before_action :authenticate_with_token, only: [:create, :update, :destroy]
+  before_action :authenticate_with_token, only: [:create, :update, :destroy, :my_posts]
 
   # GET /posts
   def index
     @posts = Post.all
 
+    render json: @posts
+  end
+
+  def my_posts
+    @posts = current_user.posts
     render json: @posts
   end
 
@@ -16,10 +21,10 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
 
     if @post.save
-      render json: @post, status: :created, location: @post
+      render json: @post, status: :created
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -27,6 +32,7 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1
   def update
+    authorize(@post)
     if @post.update(post_params)
       render json: @post
     else
@@ -36,6 +42,7 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy
+    authorize(@post)
     @post.destroy
   end
 
@@ -48,5 +55,11 @@ class PostsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def post_params
       params.require(:post).permit(:title, :content, :user_id)
+    end
+
+    # https://github.com/varvet/pundit#policies
+    def authorize(post)
+      @user = post.user
+      raise "not allowed to perform this action" unless @user == current_user
     end
 end

@@ -1,7 +1,11 @@
 module Authable
   # Ref: https://github.com/kurenn/market_place_api/blob/chapter10/app/controllers/concerns/authenticable.rb
   def current_user
-    @current_user ||= User.find_by(token: bearer_token) 
+    p bearer_token
+    p "げfwふぇwふぇふぇw"
+    @current_user ||= User.find_by(token: bearer_token)
+    p "fjefoe"
+    p @current_user
   end
 
   def authenticate_with_token
