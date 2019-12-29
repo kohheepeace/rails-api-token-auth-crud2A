@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  wrap_parameters :user, include: [:email, :password] # https://stackoverflow.com/questions/48512933/getting-unexpected-user-param-and-cant-access-password-param-in-rails
   before_action :authenticate_with_token, only: [:me]
 
   def create
